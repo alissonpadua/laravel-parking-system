@@ -15,6 +15,12 @@ class CreateSpacesTable extends Migration
     {
         Schema::create('spaces', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('parking_id');
+            $table->foreign('parking_id')->references('id')->on('parkings')->onDelete('cascade');
+            $table->integer('positionx');
+            $table->integer('positiony');
+            $table->integer('rotation');
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

@@ -15,6 +15,8 @@ class CreatePartnersTable extends Migration
     {
         Schema::create('partners', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->decimal('discount', 8, 2);
             $table->timestamps();
         });
     }

@@ -15,6 +15,16 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('moviment_id');
+            $table->foreign('moviment_id')->references('id')->on('moviments')->onDelete('cascade');
+            $table->decimal('price', 8, 2);
+            $table->string('cpfcliente');
+            $table->string('namecliente');
+            $table->string('vehiclemodel');
+            $table->string('vehicleplate');
+            $table->decimal('discount', 8, 2);
+            $table->datetime('inputed_at');
+            $table->datetime('leaved_at');
             $table->timestamps();
         });
     }
