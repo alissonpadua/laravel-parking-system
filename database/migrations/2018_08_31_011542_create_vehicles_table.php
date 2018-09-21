@@ -17,13 +17,13 @@ class CreateVehiclesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('client_id');
             $table->unsignedInteger('brand_id');
-            $table->foreign('client_id')->references('id')->on('client')->onDelete('cascade');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->string('photo');
             $table->string('color', 7);
             $table->string('plate');
             $table->string('model');
-            $table->integer('year', 4);
+            $table->string('year', 4);
             $table->timestamps();
         });
     }

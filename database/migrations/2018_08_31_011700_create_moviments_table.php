@@ -17,7 +17,7 @@ class CreateMovimentsTable extends Migration
             $table->increments('id');
             
             $table->unsignedInteger('vehicle_id');
-            $table->foreign('vehicle_id')->references('id')->on('vehicle_id')->onDelete('cascade');
+            $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
             $table->unsignedInteger('space_id');
             $table->foreign('space_id')->references('id')->on('spaces')->onDelete('cascade');
             $table->unsignedInteger('partner_id');
