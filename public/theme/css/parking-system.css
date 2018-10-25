@@ -1,0 +1,9 @@
+.modal-full {
+    min-width: 100%;
+    margin: 10% 0%;
+}
+
+.card-result{
+    font-size: 2em;
+    font-weight: bolder;
+}
