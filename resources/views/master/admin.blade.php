@@ -5,6 +5,13 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="/theme/plugin/bootstrap4/dist/css/bootstrap.min.css">
         <title>Estacionamento</title>
+
+        <script src="/theme/plugin/jquery33/jquery-3.3.1.min.js"></script>
+        <script src="/theme/plugin/bootstrap4/dist/js/popper.min.js"></script>
+        <script src="/theme/plugin/bootstrap4/dist/js/bootstrap.min.js"></script>
+        <script src="/theme/plugin/jquerymask/dist/jquery.mask.min.js"></script>
+        <script src="/theme/plugin/toastr/build/toastr.min.js"></script>
+        <script src="/theme/plugin/sweetalert2/sweetalert2.min.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-dark bg-dark flex-md-nowrap p-0 shadow">
@@ -88,37 +95,27 @@
                 </nav>
                
                 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                         <h1 class="h2">@yield('title')</h1>
                     </div>
-
                     <nav aria-label="breadcrumb">
-
                         @yield('breadcrumb')
-
                     </nav>
-
                     <div class="container-fluid">
-
+                        @if(session('msg'))
+                            <div class="no-gutters">
+                                <div class="col-md-12">
+                                    <div class="alert alert-{{ session('type') }}">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        {{ session('msg') }}
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                         @yield('content')
-
                     </div>
-
                 </main>
-
             </div>
         </div>
-
-        <script src="/theme/plugin/jquery33/jquery-3.3.1.min.js"></script>
-        <script src="/theme/plugin/bootstrap4/dist/js/popper.min.js"></script>
-        <script src="/theme/plugin/bootstrap4/dist/js/bootstrap.min.js"></script>
-        <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-        <script src="/theme/plugin/jquerymask/dist/jquery.mask.min.js"></script>
-        <script src="/theme/plugin/toastr/build/toastr.min.js"></script>
-        <script src="/theme/plugin/sweetalert2/sweetalert2.min.js"></script>
-
->>>>>>> e79bab76b5a19178e046544a91f052d8a27bc2d3
    </body>
 </html>
