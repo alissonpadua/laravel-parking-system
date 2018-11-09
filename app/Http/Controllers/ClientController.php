@@ -36,6 +36,21 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        $msg = [
+            'name.required' => 'Campo obrigatório',
+            'name.min' => 'Você deve digitar no mínimo 4 caracteres',
+            'email.required' => 'Campo obrigatório',
+            'email.email' => 'Digite um E-Mail válido',
+            'cpf.required' => 'Campo obrigatório',
+            'cpf.min' => 'CPF inválido',
+            'cpf.max' => 'CPF inválido'
+        ];
+        $request->validate([
+            'name' => 'required|min:4',
+            'email' => 'required|email',
+            'cpf' => 'required|min:14|max:14',
+        ], $msg);
+
         Client::create([
             'name' => $request->name,
             'email' => $request->email,
