@@ -1,13 +1,13 @@
 @extends('master.admin')
 
-@section('title', 'Clientes')
+@section('title', 'Veículos')
 
 @section('breadcrumb')
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
         <a href="{{ route('admin.home') }}">Dashboard</a>
       </li>
-      <li class="breadcrumb-item active" aria-current="page">Clientes</li>
+      <li class="breadcrumb-item active" aria-current="page">Veículos</li>
     </ol>
 @endsection
 
@@ -16,27 +16,35 @@
   <div class="row">
     <div class="col-md-12">
       <p>
-        <a class="btn btn-primary" href="{{ route('admin.client.create') }}">Novo Cliente</a>
+        <a class="btn btn-primary" href="{{ route('admin.vehicle.create') }}">Novo Veículo</a>
       </p>
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>CPF</th>
+            <th>Cliente</th>
+            <th>Foto</th>
+            <th>Marca</th>
+            <th>Cor</th>
+            <th>Placa</th>
+            <th>Modelo</th>
+            <th>Ano</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          @foreach($clients as $client)
+          @foreach($vehicles as $vehicle)
             <tr>
-              <td>{{ $client->name }}</td>
-              <td>{{ $client->email }}</td>
-              <td>{{ $client->cpf }}</td>
+              <th>{{ $vehicle->client->name }}</th>
+              <th>{{ $vehicle->photo }}</th>
+              <th>{{ $vehicle->brand->name }}</th>
+              <th>{{ $vehicle->color }}</th>
+              <th>{{ $vehicle->plate }}</th>
+              <th>{{ $vehicle-model> }}</th>
+              <th>{{ $vehicle->year }}</th>
               <td>
                 <div class="btn-group">
-                  <a href="{{ route('admin.client.edit', $client->id) }}" class="btn btn-secondary">Editar</a>
-                  <a href="#" id="{{ $client->id }}" class="btn btn-danger btnDeleteClient">Deletar</a>
+                  <a href="{{ route('admin.vehicle.edit', $vehicle->id) }}" class="btn btn-secondary">Editar</a>
+                  <a href="#" id="{{ $vehicle->id }}" class="btn btn-danger btnDeleteVehicle">Deletar</a>
                 </div>
               </td>
             </tr>
@@ -47,7 +55,7 @@
   </div>
 <script>
 
-$(".btnDeleteClient").click(function(e){
+$(".btnDeleteVehicle").click(function(e){
     e.preventDefault();
 
     $.ajaxSetup({
@@ -60,7 +68,7 @@ $(".btnDeleteClient").click(function(e){
     var line = $(this).parent().parent().parent();
     swal({
       title: 'Confirmação',
-      text: "Tem certeza que deseja Deletar esse Cliente?",
+      text: "Tem certeza que deseja Deletar esse Veículo?",
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -70,7 +78,7 @@ $(".btnDeleteClient").click(function(e){
       if (result.value) {
         $.ajax({
             method: "DELETE",
-            url: "/admin/client/"+id,
+            url: "/admin/vehicle/"+id,
             async: false
         }).done(function(model) {
             swal("Mensagem", model.msg, model.success == true ? "success" : "error");

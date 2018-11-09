@@ -4,11 +4,13 @@
 
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-        <li class="breadcrumb-item" aria-current="page">
-          <a href="{{ route('admin.client.index') }}">Clientes</a>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">Editar Cliente</li>
+      <li class="breadcrumb-item">
+        <a href="{{ route('admin.home') }}">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item" aria-current="page">
+        <a href="{{ route('admin.client.index') }}">Clientes</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Editar Cliente</li>
     </ol>
 @endsection
 

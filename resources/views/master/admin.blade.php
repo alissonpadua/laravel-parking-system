@@ -46,13 +46,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="cliente.html">
+                                <a class="nav-link" href="{{ route('admin.client.index') }}">
                                     <span data-feather="users"></span>
                                     Clientes
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="brands.html">
+                                <a class="nav-link" href="{{ route('admin.brand.index') }}">
                                     <span data-feather="bar-chart-2"></span>
                                     Marcas
                                 </a>

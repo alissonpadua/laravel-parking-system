@@ -36,21 +36,11 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $msg = [
-            'name.required' => 'Campo obrigatório',
-            'name.min' => 'Você deve digitar no mínimo 4 caracteres',
-            'email.required' => 'Campo obrigatório',
-            'email.email' => 'Digite um E-Mail válido',
-            'cpf.required' => 'Campo obrigatório',
-            'cpf.min' => 'CPF inválido',
-            'cpf.max' => 'CPF inválido'
-        ];
         $request->validate([
             'name' => 'required|min:4',
             'email' => 'required|email',
             'cpf' => 'required|min:14|max:14',
-        ], $msg);
-
+        ]);
         Client::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -97,20 +87,25 @@ class ClientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {        
-        $client = Client::find($id);
-        if(!$client){
-            return redirect()->route('admin.client.index')
-                ->with('msg', 'Cliente não encontrado')
-                ->with('type', 'danger');
-        }
-        $client->name = $request->name;
-        $client->email = $request->email;
-        $client->cpf = $request->cpf;
-        $client->save();
-        return redirect()->route('admin.client.index')
-                ->with('msg', 'Cliente Atualizado com sucesso')
-                ->with('type', 'success');
+    {   
+      $request->validate([
+        'name' => 'required|min:4',
+        'email' => 'required|email',
+        'cpf' => 'required|min:14|max:14',
+      ]);     
+      $client = Client::find($id);
+      if(!$client){
+          return redirect()->route('admin.client.index')
+              ->with('msg', 'Cliente não encontrado')
+              ->with('type', 'danger');
+      }
+      $client->name = $request->name;
+      $client->email = $request->email;
+      $client->cpf = $request->cpf;
+      $client->save();
+      return redirect()->route('admin.client.index')
+              ->with('msg', 'Cliente Atualizado com sucesso')
+              ->with('type', 'success');
         
     }
 
