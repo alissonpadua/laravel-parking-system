@@ -66,8 +66,7 @@ $(".btnDeleteBrand").click(function(e){
       if (result.value) {
         $.ajax({
             method: "DELETE",
-            url: "/admin/brand/"+id,
-            async: false
+            url: "/admin/brand/"+id
         }).done(function(model) {
             swal("Mensagem", model.msg, model.success == true ? "success" : "error");
             if(model.success){

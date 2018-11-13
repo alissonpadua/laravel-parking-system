@@ -21,7 +21,7 @@ Route::prefix('admin')->group(function(){
     'edit' => 'admin.brand.edit',
     'update' => 'admin.brand.update'
   ]);
-  Route::resource('vehicle', 'BrandController')->names([
+  Route::resource('vehicle', 'VehicleController')->names([
     'index' => 'admin.vehicle.index',
     'create' => 'admin.vehicle.create',
     'store' => 'admin.vehicle.store',

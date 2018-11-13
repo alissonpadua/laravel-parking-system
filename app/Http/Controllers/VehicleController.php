@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Vehicle;
+use App\Client;
+use App\Brand;
 
 class VehicleController extends Controller
 {
@@ -13,7 +16,8 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        return view('admin.vehicle.index');
+        $vehicles = Vehicle::all();
+        return view('admin.vehicle.index', compact('vehicles'));
     }
 
     /**
@@ -23,7 +27,9 @@ class VehicleController extends Controller
      */
     public function create()
     {
-        //
+        $clients = Client::all();
+        $brands = Brand::all();
+        return view('admin.vehicle.create', ['clients' => $clients, 'brands' => $brands]);
     }
 
     /**

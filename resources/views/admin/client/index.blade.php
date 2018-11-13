@@ -70,8 +70,7 @@ $(".btnDeleteClient").click(function(e){
       if (result.value) {
         $.ajax({
             method: "DELETE",
-            url: "/admin/client/"+id,
-            async: false
+            url: "/admin/client/"+id
         }).done(function(model) {
             swal("Mensagem", model.msg, model.success == true ? "success" : "error");
             if(model.success){

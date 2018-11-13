@@ -58,7 +58,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="vehicles.html">
+                                <a class="nav-link" href="{{ route('admin.vehicle.index') }}">
                                     <span data-feather="truck"></span>
                                     Veículos
                                 </a>

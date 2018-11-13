@@ -39,7 +39,7 @@
               <th>{{ $vehicle->brand->name }}</th>
               <th>{{ $vehicle->color }}</th>
               <th>{{ $vehicle->plate }}</th>
-              <th>{{ $vehicle-model> }}</th>
+              <th>{{ $vehicle->model }}</th>
               <th>{{ $vehicle->year }}</th>
               <td>
                 <div class="btn-group">
