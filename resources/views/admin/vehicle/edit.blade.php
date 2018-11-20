@@ -10,7 +10,7 @@
       <li class="breadcrumb-item">
         <a href="{{ route('admin.vehicle.index') }}">Veículos</a>
       </li>
-      <li class="breadcrumb-item active" aria-current="page">Cadastrar Veículo</li>
+      <li class="breadcrumb-item active" aria-current="page">Editar Veículo</li>
     </ol>
 @endsection
 
@@ -19,16 +19,12 @@
 
   <div class="row">
     <div class="col-md-12">
-      <form action="{{ route('admin.vehicle.store') }}" method="POST">
+      <form action="{{ route('admin.vehicle.update', $vehicle->id) }}" method="POST">
         @csrf
-        @method('POST')
+        @method('PUT')
         <div class="form-group">
           <label for="client">Cliente</label>
-          <select class="form-control {{ $errors->has('client') ? 'is-invalid' : '' }}" id="client_id" name="client_id">
-            @foreach($clients as $client)
-              <option value="{{ $client->id }}">{{ $client->name }}</option>
-            @endforeach
-          </select>
+          <input class="form-control" value="{{ $vehicle->client->name }}" type="text" disabled>
           @if ($errors->has('client_id'))
               <span class="help-block text-danger">
                   <strong>{{ $errors->first('client_id') }}</strong>
@@ -37,11 +33,7 @@
         </div>
         <div class="form-group">
           <label for="brand">Marca</label>
-          <select class="form-control {{ $errors->has('brand') ? 'is-invalid' : '' }}" id="brand_id" name="brand_id">
-            @foreach($brands as $brand)
-              <option value="{{ $brand->id }}">{{ $brand->name }}</option>
-            @endforeach
-          </select>
+          <input class="form-control" value="{{ $vehicle->brand->name }}" type="text" disabled>
           @if ($errors->has('brand_id'))
               <span class="help-block text-danger">
                   <strong>{{ $errors->first('brand_id') }}</strong>
@@ -50,7 +42,7 @@
         </div>
         <div class="form-group">
           <label for="color">Cor do Veículo</label>
-          <input class="form-control {{ $errors->has('color') ? 'is-invalid' : '' }}" id="color" name="color" type="text" value="{{ old('color') }}">
+          <input class="form-control {{ $errors->has('color') ? 'is-invalid' : '' }}" id="color" name="color" type="text" value="{{  $vehicle->color }}">
           @if ($errors->has('color'))
               <span class="help-block text-danger">
                   <strong>{{ $errors->first('color') }}</strong>
@@ -59,7 +51,7 @@
         </div>
         <div class="form-group">
           <label for="plate">Placa</label>
-          <input class="form-control {{ $errors->has('plate') ? 'is-invalid' : '' }}" id="plate" name="plate" type="text" value="{{ old('plate') }}">
+          <input class="form-control" type="text" value="{{ $vehicle->plate }}" disabled>
           @if ($errors->has('plate'))
               <span class="help-block text-danger">
                   <strong>{{ $errors->first('plate') }}</strong>
@@ -68,7 +60,7 @@
         </div>
         <div class="form-group">
           <label for="model">Modelo</label>
-          <input class="form-control {{ $errors->has('model') ? 'is-invalid' : '' }}" id="model" name="model" type="text" value="{{ old('model') }}">
+          <input class="form-control {{ $errors->has('model') ? 'is-invalid' : '' }}" id="model" name="model" type="text" value="{{  $vehicle->model }}">
           @if ($errors->has('model'))
               <span class="help-block text-danger">
                   <strong>{{ $errors->first('model') }}</strong>
@@ -77,7 +69,7 @@
         </div>
         <div class="form-group">
           <label for="year">Ano de Fabricação</label>
-          <input class="form-control {{ $errors->has('year') ? 'is-invalid' : '' }}" id="year" name="year" type="text" value="{{ old('year') }}">
+          <input class="form-control {{ $errors->has('year') ? 'is-invalid' : '' }}" id="year" name="year" type="text" value="{{  $vehicle->year }}">
           @if ($errors->has('year'))
               <span class="help-block text-danger">
                   <strong>{{ $errors->first('year') }}</strong>
@@ -85,7 +77,7 @@
           @endif
         </div>
         <div class="form-group text-right">
-          <button type="submit" class="btn btn-success">Cadastrar</button>
+          <button type="submit" class="btn btn-success">Salvar Alterações</button>
         </div>
       </form>
     </div>

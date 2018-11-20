@@ -64,7 +64,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="parceiros.html">
+                                <a class="nav-link" href="{{ route('admin.partner.index') }}">
                                     <span data-feather="user-check"></span>
                                     Parceiros
                                 </a>

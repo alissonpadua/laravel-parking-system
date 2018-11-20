@@ -40,7 +40,20 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'client_id' => 'required',
+        'brand_id' => 'required',
+        'color' => 'required',
+        'plate' => 'required|min:8|max:8',
+        'model' => 'required',
+        'year' => 'required|min:4|max:4'
+      ]);
+
+      Vehicle::create($request->all());
+
+      return redirect()->route('admin.vehicle.index')
+        ->with('msg', 'Veículo Cadastrado com sucesso')
+        ->with('type', 'success');
     }
 
     /**
@@ -62,7 +75,13 @@ class VehicleController extends Controller
      */
     public function edit($id)
     {
-        //
+      $vehicle = Vehicle::find($id);
+      if(!$vehicle){
+          return redirect()->route('admin.vehicle.index')
+              ->with('msg', 'Veículo não encontrado')
+              ->with('type', 'danger');
+      }
+      return view('admin.vehicle.edit', compact('vehicle'));
     }
 
     /**
@@ -74,7 +93,28 @@ class VehicleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $request->validate([
+        'color' => 'required',
+        'model' => 'required',
+        'year' => 'required|min:4|max:4'
+      ]);  
+
+      $vehicle = Vehicle::find($id);
+
+      if(!$vehicle){
+          return redirect()->route('admin.vehicle.index')
+              ->with('msg', 'Veículo não encontrado')
+              ->with('type', 'danger');
+      }
+
+      $vehicle->color = $request->color;
+      $vehicle->model = $request->model;
+      $vehicle->year = $request->year;
+      $vehicle->save();
+
+      return redirect()->route('admin.vehicle.index')
+              ->with('msg', 'Veículo Atualizado com sucesso')
+              ->with('type', 'success');
     }
 
     /**
@@ -85,6 +125,19 @@ class VehicleController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $vehicle = Vehicle::find($id);
+      if(!$vehicle){
+          $msg['success'] = false;
+          $msg['msg'] = 'Veículo não encontrado';
+          return $msg;
+      }
+      if($vehicle->delete()){
+          $msg['success'] = true;
+          $msg['msg'] = 'Veículo Deletado com sucesso';
+      }else{
+          $msg['success'] = false;
+          $msg['msg'] = 'Falha ao Deletar Veículo, tente novamente';
+      }
+      return $msg;
     }
 }

@@ -28,4 +28,11 @@ Route::prefix('admin')->group(function(){
     'edit' => 'admin.vehicle.edit',
     'update' => 'admin.vehicle.update'
   ]);
+  Route::resource('partner', 'PartnerController')->names([
+    'index' => 'admin.partner.index',
+    'create' => 'admin.partner.create',
+    'store' => 'admin.partner.store',
+    'edit' => 'admin.partner.edit',
+    'update' => 'admin.partner.update'
+  ]);
 });

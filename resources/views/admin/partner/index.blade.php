@@ -1,13 +1,13 @@
 @extends('master.admin')
 
-@section('title', 'Marcas')
+@section('title', 'Parceiros')
 
 @section('breadcrumb')
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
         <a href="{{ route('admin.home') }}">Dashboard</a>
       </li>
-      <li class="breadcrumb-item active" aria-current="page">Marcas</li>
+      <li class="breadcrumb-item active" aria-current="page">Parceiros</li>
     </ol>
 @endsection
 
@@ -16,23 +16,25 @@
   <div class="row">
     <div class="col-md-12">
       <p>
-        <a class="btn btn-primary" href="{{ route('admin.brand.create') }}">Nova Marca</a>
+        <a class="btn btn-primary" href="{{ route('admin.partner.create') }}">Novo Parceiro</a>
       </p>
       <table class="table table-hover">
         <thead>
           <tr>
             <th>Nome</th>
+            <th>% Desconto</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          @foreach($brands as $brand)
+          @foreach($partners as $partner)
             <tr>
-              <td>{{ $brand->name }}</td>
+              <td>{{ $partner->name }}</td>
+              <td>{{ $partner->discount }}</td>
               <td>
                 <div class="btn-group">
-                  <a href="{{ route('admin.brand.edit', $brand->id) }}" class="btn btn-secondary">Editar</a>
-                  <a href="#" id="{{ $brand->id }}" class="btn btn-danger btnDeleteBrand">Deletar</a>
+                  <a href="{{ route('admin.partner.edit', $partner->id) }}" class="btn btn-secondary">Editar</a>
+                  <a href="#" id="{{ $partner->id }}" class="btn btn-danger btnDeletePartner">Deletar</a>
                 </div>
               </td>
             </tr>
@@ -43,7 +45,7 @@
   </div>
 <script>
 
-$(".btnDeleteBrand").click(function(e){
+$(".btnDeletePartner").click(function(e){
     e.preventDefault();
 
     $.ajaxSetup({
@@ -56,7 +58,7 @@ $(".btnDeleteBrand").click(function(e){
     var line = $(this).parent().parent().parent();
     swal({
       title: 'Confirmação',
-      text: "Tem certeza que deseja Deletar essa Marca?",
+      text: "Tem certeza que deseja Deletar esse Parceiro?",
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -67,7 +69,7 @@ $(".btnDeleteBrand").click(function(e){
       if (result.value) {
         $.ajax({
             method: "DELETE",
-            url: "/admin/brand/"+id
+            url: "/admin/partner/"+id
         }).done(function(model) {
             swal("Mensagem", model.msg, model.success == true ? "success" : "error");
             if(model.success){

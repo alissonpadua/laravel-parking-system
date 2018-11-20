@@ -65,7 +65,8 @@ $(".btnDeleteClient").click(function(e){
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sim, pode deletar!'
+      confirmButtonText: 'Sim, pode deletar!',
+      cancelButtonText: 'Não'
     }).then((result) => {
       if (result.value) {
         $.ajax({

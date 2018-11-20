@@ -34,13 +34,13 @@
         <tbody>
           @foreach($vehicles as $vehicle)
             <tr>
-              <th>{{ $vehicle->client->name }}</th>
-              <th>{{ $vehicle->photo }}</th>
-              <th>{{ $vehicle->brand->name }}</th>
-              <th>{{ $vehicle->color }}</th>
-              <th>{{ $vehicle->plate }}</th>
-              <th>{{ $vehicle->model }}</th>
-              <th>{{ $vehicle->year }}</th>
+              <td>{{ $vehicle->client->name }}</td>
+              <td>{{ $vehicle->photo }}</td>
+              <td>{{ $vehicle->brand->name }}</td>
+              <td>{{ $vehicle->color }}</td>
+              <td>{{ $vehicle->plate }}</td>
+              <td>{{ $vehicle->model }}</td>
+              <td>{{ $vehicle->year }}</td>
               <td>
                 <div class="btn-group">
                   <a href="{{ route('admin.vehicle.edit', $vehicle->id) }}" class="btn btn-secondary">Editar</a>
@@ -79,7 +79,6 @@ $(".btnDeleteVehicle").click(function(e){
         $.ajax({
             method: "DELETE",
             url: "/admin/vehicle/"+id,
-            async: false
         }).done(function(model) {
             swal("Mensagem", model.msg, model.success == true ? "success" : "error");
             if(model.success){
