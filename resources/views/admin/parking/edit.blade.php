@@ -10,7 +10,7 @@
       <li class="breadcrumb-item" aria-current="page">
         <a href="{{ route('admin.parking.index') }}">Estacionamentos</a>
       </li>
-      <li class="breadcrumb-item active" aria-current="page">Novo Estacionamento</li>
+      <li class="breadcrumb-item active" aria-current="page">Editar Estacionamento</li>
     </ol>
 @endsection
 
@@ -18,12 +18,12 @@
 
   <div class="row">
     <div class="col-md-12">
-      <form action="{{ route('admin.parking.store') }}" method="POST">
+      <form action="{{ route('admin.parking.update', $parking->id) }}" method="POST">
         @csrf
-        @method('POST')
+        @method('PUT')
         <div class="form-group">
           <label for="name">Nome</label>
-          <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name" name="name" type="text" value="{{ old('name') }}">
+          <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name" name="name" type="text" value="{{ $parking->name }}">
           @if ($errors->has('name'))
               <span class="help-block text-danger">
                   <strong>{{ $errors->first('name') }}</strong>
@@ -32,15 +32,10 @@
         </div>
         <div class="form-group">
           <label for="cnpj">CNPJ</label>
-          <input class="form-control {{ $errors->has('cnpj') ? 'is-invalid' : '' }}" id="cnpj" name="cnpj" type="text" value="{{ old('cnpj') }}">
-          @if ($errors->has('cnpj'))
-              <span class="help-block text-danger">
-                  <strong>{{ $errors->first('cnpj') }}</strong>
-              </span>
-          @endif
+          <input class="form-control" type="text" value="{{ $parking->cnpj }}" disabled>
         </div>
         <div class="form-group text-right">
-          <button type="submit" class="btn btn-success">Cadastrar</button>
+          <button type="submit" class="btn btn-success">Salvar Alterações</button>
         </div>
       </form>
     </div>

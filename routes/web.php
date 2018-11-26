@@ -35,4 +35,11 @@ Route::prefix('admin')->group(function(){
     'edit' => 'admin.partner.edit',
     'update' => 'admin.partner.update'
   ]);
+  Route::resource('parking', 'ParkingController')->names([
+    'index' => 'admin.parking.index',
+    'create' => 'admin.parking.create',
+    'store' => 'admin.parking.store',
+    'edit' => 'admin.parking.edit',
+    'update' => 'admin.parking.update'
+  ]);
 });

@@ -15,7 +15,7 @@ class CreateParkingsTable extends Migration
     {
         Schema::create('parkings', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('cnpj', 14);
+            $table->string('cnpj', 18);
             $table->string('name');
             $table->timestamps();
         });
