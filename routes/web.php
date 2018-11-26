@@ -42,4 +42,11 @@ Route::prefix('admin')->group(function(){
     'edit' => 'admin.parking.edit',
     'update' => 'admin.parking.update'
   ]);
+  Route::resource('space', 'SpaceController')->names([
+    'index' => 'admin.space.index',
+    'create' => 'admin.space.create',
+    'store' => 'admin.space.store',
+    'edit' => 'admin.space.edit',
+    'update' => 'admin.space.update'
+  ]);
 });

@@ -17,9 +17,7 @@ class CreateSpacesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('parking_id');
             $table->foreign('parking_id')->references('id')->on('parkings')->onDelete('cascade');
-            $table->integer('positionx');
-            $table->integer('positiony');
-            $table->integer('rotation');
+            $table->string('externalid');
             $table->boolean('active')->default(true);
             $table->timestamps();
         });
