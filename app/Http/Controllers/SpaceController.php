@@ -8,6 +8,29 @@ use App\Space;
 
 class SpaceController extends Controller
 {
+    
+    public function getFreeSpaces(){
+
+        $spaces = Space::all();
+        $freeSpaces = collect();
+
+        foreach($spaces as $space){
+
+            if(!$space->isBusy()){
+                
+                $space->parking_name = $space->parking->name;
+
+                $freeSpaces->push($space);
+
+            }
+
+        }
+
+        return $freeSpaces->groupBy('parking_id');
+
+
+    }
+
     /**
      * Display a listing of the resource.
      *

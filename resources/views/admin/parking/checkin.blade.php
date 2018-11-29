@@ -4,16 +4,16 @@
 
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+        <li class="breadcrumb-item">
+            <a href="{{ route('admin.home') }}">Dashboard</a>
+        </li>
         <li class="breadcrumb-item active" aria-current="page">Registrar Entrada de Veículo</li>
     </ol>
 @endsection
 
 @section('content')
 
-    <div class="form-group mb-3">
-        <input type="text" class="form-control" placeholder="Buscar por nome, cpf, veiculo ou placa">
-    </div>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <table class="table table-hover">
         <thead>
@@ -32,7 +32,7 @@
                   <td>{{ $vehicle->model }} - {{ $vehicle->color }}</td>
                   <td>{{ $vehicle->plate }}</td>
                   <td>
-                      <button id="btnEntrance" type="button" class="btn btn-info">Registrar Entrada</button>
+                      <button id="vehicle_{{ $vehicle->id }}" type="button" class="btn btn-info btnEntrance">Registrar Entrada</button>
                   </td>
               </tr>
             @endif
@@ -40,98 +40,152 @@
         </tbody>
     </table>
 
-        <div id="myOpenSpace" class="modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-full" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Vagas Disponíveis</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
+    <div id="myOpenSpace" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-full" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Vagas Disponíveis</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="funkyradio">
+            
+
+                            @foreach($parkings as $parking)
+
+                                @if(count($parking->spaces) > 0)
+
+                                    <h5>{{ $parking->name }}</h5>
+
+                                    <div class="row">
+
+                                        @foreach($parking->spaces as $space)
+
+                                            @if(!$space->isBusy())
+
+                                                <div class="col-lg-2 col-md-3 col-xs-6">
+                                                    <div class="funkyradio-info">
+                                                        <input type="radio" name="space" id="space_{{ $space->id }}">
+                                                        <label for="space_{{ $space->id }}">{{ $space->externalid }}</label>
+                                                    </div>
+                                                </div>
+                                                
+                                            @endif
+
+                                        @endforeach
+        
+                                    
+                                    </div>
+
+                                @endif
+
+                            @endforeach
+                     
                     </div>
-                    <div class="modal-body">
-                        <div class="funkyradio">
-                            <div class="row">
-                                <div class="col-lg-2 col-md-3 col-xs-6">
-                                    <div class="funkyradio-info">
-                                        <input type="radio" name="radio" id="radio1" />
-                                        <label for="radio1">01 - SUPA1</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3 col-xs-6">
-                                    <div class="funkyradio-info">
-                                        <input type="radio" name="radio" id="radio2" />
-                                        <label for="radio2">02 - SUPA2</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3 col-xs-6">
-                                    <div class="funkyradio-info">
-                                        <input type="radio" name="radio" id="radio3" />
-                                        <label for="radio3">03 - SUPA3</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3 col-xs-6">
-                                    <div class="funkyradio-info">
-                                        <input type="radio" name="radio" id="radio4" />
-                                        <label for="radio4">04 - SUPA4</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3 col-xs-6">
-                                    <div class="funkyradio-info">
-                                        <input type="radio" name="radio" id="radio5" />
-                                        <label for="radio5">05 - SUPA5</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3 col-xs-6">
-                                    <div class="funkyradio-info">
-                                        <input type="radio" name="radio" id="radio6" />
-                                        <label for="radio6">06 - SUPA6</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3 col-xs-6">
-                                    <div class="funkyradio-info">
-                                        <input type="radio" name="radio" id="radio7" />
-                                        <label for="radio7">07 - SUPA7</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3 col-xs-6">
-                                    <div class="funkyradio-info">
-                                        <input type="radio" name="radio" id="radio8" />
-                                        <label for="radio8">08 - SUPA8</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3 col-xs-6">
-                                    <div class="funkyradio-info">
-                                        <input type="radio" name="radio" id="radio9" />
-                                        <label for="radio9">09 - SUPA9</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3 col-xs-6">
-                                    <div class="funkyradio-info">
-                                        <input type="radio" name="radio" id="radio10" />
-                                        <label for="radio10">010 - SUPA10</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3 col-xs-6">
-                                    <div class="funkyradio-info">
-                                        <input type="radio" name="radio" id="radio11" />
-                                        <label for="radio11">011 - SUPA11</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3 col-xs-6">
-                                    <div class="funkyradio-info">
-                                        <input type="radio" name="radio" id="radio12" />
-                                        <label for="radio12">012 - SUPA12</label>
-                                    </div>
-                                </div>                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button id="btnConfirmEntrance" type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-info" data-dismiss="modal">Continuar</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button id="btnConfirmEntrance" type="button" class="btn btn-info">Continuar</button>
                 </div>
             </div>
         </div>
+    </div>
+
+    <script>
+
+        //['vehicle_id', 'space_id', 'partner_id', 'inputed_at', 'leaved_at'];
+
+        var vehicle_id = '';
+        var space_id = '';
+
+        $(".btnEntrance").click(function(e){
+
+            e.preventDefault();
+
+            vehicle_id =$(this).attr('id');
+            $("#myOpenSpace").modal('show');
+
+        });
+
+        
+        $("#btnConfirmEntrance").click(function(e){
+
+            e.preventDefault();
+            space_id = $('input[name=space]:checked', '.funkyradio').attr('id');
+
+            if(!space_id){
+                swal(
+                    'Erro',
+                    'Você deve selecionar uma vaga',
+                    'error'
+                )
+            }else{
+
+                confirmEntrance(vehicle_id, space_id);
+
+            }
+
+        });
+
+        $('#myOpenSpace').on('hidden.bs.modal', function (e) {
+            
+            vehicle_id = '';
+            space_id = '';
+            location.reload();
+
+        });
+
+        function confirmEntrance(vehicle_id, space_id){
+            
+
+            if(vehicle_id == "" || space_id == ""){
+                swal(
+                    'Erro',
+                    'Falha ao confirmar entrada, tente novamente',
+                    'error'
+                );
+
+                $("#myOpenSpace").modal('hide');
+            }
+            
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+     
+            $.ajax({
+                url: '/admin/moviment/confirm-entrance',
+                type: 'POST',
+                data: {'_token': CSRF_TOKEN, 'vehicle_id': vehicle_id, 'space_id': space_id},
+                dataType: 'JSON',
+                error: function(x, e) {
+                    if (x.status == 422) {
+                        swal(
+                            'Erro',
+                            'Falha ao confirmar entrada, tente novamente',
+                            'error'
+                        );
+                        $("#myOpenSpace").modal('hide');
+                    }
+
+                     if (x.status == 500) {
+                        swal(
+                            'Erro',
+                            'Falha de Sistema, contate o administrador',
+                            'error'
+                        );
+                     }
+                },
+                success: function (data) { 
+                    
+                    swal(
+                        data.error ? 'Erro' : 'Sucesso',
+                        data.msg,
+                        data.error ? 'error' : 'success'
+                    )
+
+                }
+            }); 
+        }
+
+    </script>
 @endsection

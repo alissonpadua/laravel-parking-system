@@ -5,6 +5,7 @@ Route::get('/', function () {
 })->name('admin.home');
 
 Route::prefix('admin')->group(function(){
+
   Route::get('parking/checkin', 'ParkingController@getCheckIn')->name('admin.parking.getCheckIn');
   Route::get('parking/checkout', 'ParkingController@getCheckOut')->name('admin.parking.getCheckOut');
   Route::resource('client', 'ClientController')->names([
@@ -14,6 +15,7 @@ Route::prefix('admin')->group(function(){
       'edit' => 'admin.client.edit',
       'update' => 'admin.client.update'
   ]);
+
   Route::resource('brand', 'BrandController')->names([
     'index' => 'admin.brand.index',
     'create' => 'admin.brand.create',
@@ -21,6 +23,7 @@ Route::prefix('admin')->group(function(){
     'edit' => 'admin.brand.edit',
     'update' => 'admin.brand.update'
   ]);
+
   Route::resource('vehicle', 'VehicleController')->names([
     'index' => 'admin.vehicle.index',
     'create' => 'admin.vehicle.create',
@@ -28,6 +31,7 @@ Route::prefix('admin')->group(function(){
     'edit' => 'admin.vehicle.edit',
     'update' => 'admin.vehicle.update'
   ]);
+
   Route::resource('partner', 'PartnerController')->names([
     'index' => 'admin.partner.index',
     'create' => 'admin.partner.create',
@@ -35,6 +39,7 @@ Route::prefix('admin')->group(function(){
     'edit' => 'admin.partner.edit',
     'update' => 'admin.partner.update'
   ]);
+
   Route::resource('parking', 'ParkingController')->names([
     'index' => 'admin.parking.index',
     'create' => 'admin.parking.create',
@@ -42,6 +47,7 @@ Route::prefix('admin')->group(function(){
     'edit' => 'admin.parking.edit',
     'update' => 'admin.parking.update'
   ]);
+
   Route::prefix('parking')->group(function () {
     Route::get('checkin', 'ParkingController@getCheckin')->name('admin.parking.getCheckin');
   });
@@ -54,8 +60,17 @@ Route::prefix('admin')->group(function(){
     'update' => 'admin.space.update'
   ]);
 
+  Route::prefix('json')->group(function () {
+    Route::get('space/free', 'SpaceController@getFreeSpaces')->name('admin.space.getFreeSpaces');
+  });
+
   Route::prefix('pricetable')->group(function () {
     Route::get('', 'PricetableController@getIndex')->name('admin.pricetable.getindex');
     Route::post('', 'PricetableController@postCreate')->name('admin.pricetable.postCreate');
   });
+
+  Route::prefix('moviment')->group(function () {
+    Route::post('confirm-entrance', 'MovimentController@postConfirmEntrance');
+  });
+
 });

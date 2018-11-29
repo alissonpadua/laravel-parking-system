@@ -14,6 +14,7 @@ class CreateMovimentsTable extends Migration
     public function up()
     {
         Schema::create('moviments', function (Blueprint $table) {
+            
             $table->increments('id');
             
             $table->unsignedInteger('vehicle_id');
@@ -23,8 +24,9 @@ class CreateMovimentsTable extends Migration
             $table->unsignedInteger('partner_id')->nullable();
             $table->foreign('partner_id')->references('id')->on('partners')->onDelete('cascade');
             $table->datetime('inputed_at');
-            $table->datetime('leaved_at')->nullable();;
+            $table->datetime('leaved_at')->nullable();
             $table->timestamps();
+            
         });
     }
 

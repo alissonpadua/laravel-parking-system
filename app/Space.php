@@ -11,4 +11,26 @@ class Space extends Model
     public function parking(){
         return $this->belongsTo('App\Parking');
     }
+
+    public function isBusy(){
+        
+        $moviments = Moviment::where('space_id', $this->id)->get();
+
+        if(!$moviments){
+            return false;
+        }
+
+        foreach($moviments as $moviment){
+
+            if($moviment->inputed_at && !$moviment->leaved_at){
+
+                return true;
+
+            }
+
+        }
+        
+        return false;
+
+    }
 }

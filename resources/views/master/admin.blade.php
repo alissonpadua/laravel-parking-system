@@ -3,9 +3,13 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="/theme/plugin/bootstrap4/dist/css/bootstrap.min.css">
+    
         <title>Estacionamento</title>
 
+        <link rel="stylesheet" href="/theme/css/parking-system.css">  
+
+        <link rel="stylesheet" href="/theme/plugin/bootstrap4/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/theme/plugin/funkyradio/funkyradio.min.css">
         <script src="/theme/plugin/jquery33/jquery-3.3.1.min.js"></script>
         <script src="/theme/plugin/bootstrap4/dist/js/popper.min.js"></script>
         <script src="/theme/plugin/bootstrap4/dist/js/bootstrap.min.js"></script>

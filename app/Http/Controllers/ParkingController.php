@@ -11,8 +11,12 @@ class ParkingController extends Controller
 {
 
     public function getCheckin(){
+
       $vehicles = Vehicle::all();
-      return view('admin.parking.checkin', compact('vehicles'));
+      $parkings = Parking::all();
+
+      return view('admin.parking.checkin', ['vehicles' => $vehicles, 'parkings' => $parkings]);
+
     }
 
     /**
