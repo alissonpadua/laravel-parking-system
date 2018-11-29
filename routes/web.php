@@ -49,4 +49,9 @@ Route::prefix('admin')->group(function(){
     'edit' => 'admin.space.edit',
     'update' => 'admin.space.update'
   ]);
+
+  Route::prefix('pricetable')->group(function () {
+    Route::get('', 'PricetableController@getIndex')->name('admin.pricetable.getindex');
+    Route::post('', 'PricetableController@postCreate')->name('admin.pricetable.postCreate');
+  });
 });
