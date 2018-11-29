@@ -8,6 +8,7 @@ use App\Moviment;
 use Carbon\Carbon;
 use App\Vehicle;
 use App\Space;
+use App\Pricetable;
 
 class MovimentController extends Controller
 {
@@ -58,15 +59,36 @@ class MovimentController extends Controller
     }
 
     public function getCheckoutResume($id){
+
       $moviment = Moviment::find($id);
 
       if(!$moviment){
         return ['error' => true, 'msg' => 'Falha ao calcular saída, tente novamente'];
       }
 
-      return Carbon::now()->diffInMinutes($moviment->inputed_at);
-      dd($moviment);
+      $currentPrices = Pricetable::orderBy('id', 'desc')->first();
+
+      $minutesTotal = Carbon::now()->diffInMinutes($moviment->inputed_at);
+
+      $hoursTotal = $minutesTotal / 60;
+
+      $hoursToPay = ceil($hoursTotal);
+
+      $normalToPay = $currentPrices->getOriginal('normalprice');
+
+      $overtimeToPay = (($hoursToPay-1) * $currentPrices->getOriginal('overtimeprice'));
+     
+      return [
+          'minutesTotal' => $minutesTotal,
+          'hoursTotal' => floatval(number_format($hoursTotal, 2)),
+          'hoursToPay' => $hoursToPay,
+          'normalToPay' => floatval($normalToPay),
+          'overtimeToPay' => $overtimeToPay,
+          'totalToPay' => ($overtimeToPay + $normalToPay)
+      ];
 
     }
+
+    
 
 }

@@ -9,11 +9,11 @@ class PricetableController extends Controller
 {
     public function getIndex(){
 
-      $currentPrices = Pricetable::orderBy('id', 'desc')->first();
+      $currentPrices = Pricetable::orderBy('created_at', 'desc')->first();
       $pricetables = [];
 
       if($currentPrices){
-        $pricetables = Pricetable::orderBy('id', 'desc')->where('id', '!=', $currentPrices->id)->get();
+        $pricetables = Pricetable::orderBy('created_at', 'desc')->where('id', '!=', $currentPrices->id)->get();
       }
 
       return view('admin.pricetable.index', ['currentPrices' => $currentPrices, 'pricetables' => $pricetables]);
