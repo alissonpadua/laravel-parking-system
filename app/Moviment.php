@@ -9,13 +9,13 @@ class Moviment extends Model
   protected $fillable = ['vehicle_id', 'space_id', 'partner_id', 'inputed_at', 'leaved_at'];
 
   public function vehicle(){
-    return $this->hasOne('App\Vehicle');
+    return $this->belongsTo('App\Vehicle');
   }
   public function space(){
-    return $this->hasOne('App\Space');
+    return $this->belongsTo('App\Space');
   }
   public function partner(){
-    return $this->hasOne('App\Partner');
+    return $this->belongsTo('App\Partner');
   }
 
 }

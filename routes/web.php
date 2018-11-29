@@ -6,8 +6,6 @@ Route::get('/', function () {
 
 Route::prefix('admin')->group(function(){
 
-  Route::get('parking/checkin', 'ParkingController@getCheckIn')->name('admin.parking.getCheckIn');
-  Route::get('parking/checkout', 'ParkingController@getCheckOut')->name('admin.parking.getCheckOut');
   Route::resource('client', 'ClientController')->names([
       'index' => 'admin.client.index',
       'create' => 'admin.client.create',
@@ -40,6 +38,11 @@ Route::prefix('admin')->group(function(){
     'update' => 'admin.partner.update'
   ]);
 
+  Route::prefix('parking')->group(function () {
+    Route::get('checkin', 'ParkingController@getCheckin')->name('admin.parking.getCheckin');
+    Route::get('checkout', 'ParkingController@getCheckout')->name('admin.parking.getCheckout');
+  });
+
   Route::resource('parking', 'ParkingController')->names([
     'index' => 'admin.parking.index',
     'create' => 'admin.parking.create',
@@ -48,9 +51,7 @@ Route::prefix('admin')->group(function(){
     'update' => 'admin.parking.update'
   ]);
 
-  Route::prefix('parking')->group(function () {
-    Route::get('checkin', 'ParkingController@getCheckin')->name('admin.parking.getCheckin');
-  });
+
 
   Route::resource('space', 'SpaceController')->names([
     'index' => 'admin.space.index',

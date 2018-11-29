@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Parking;
 use App\Client;
 use App\Vehicle;
+use App\Moviment;
 
 class ParkingController extends Controller
 {
@@ -16,6 +17,13 @@ class ParkingController extends Controller
       $parkings = Parking::all();
 
       return view('admin.parking.checkin', ['vehicles' => $vehicles, 'parkings' => $parkings]);
+
+    }
+
+    public function getCheckout(){
+
+        $moviments = Moviment::all();
+        return view('admin.parking.checkout', ['moviments' => $moviments]);
 
     }
 

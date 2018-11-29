@@ -44,7 +44,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.parking.getCheckOut') }}">
+                                <a class="nav-link" href="{{ route('admin.parking.getCheckout') }}">
                                     <span data-feather="plus-square"></span>
                                     Registrar Saída
                                 </a>
