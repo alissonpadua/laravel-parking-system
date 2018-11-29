@@ -14,4 +14,10 @@ class Vehicle extends Model
   public function brand(){
     return $this->belongsTo('App\Brand');
   }
+  public function isParked(){
+    return Moviment::where('id', $this->id)
+      ->whereNotNull('inputed_at')
+      ->whereNull('leaved_at')
+      ->get();
+  }
 }

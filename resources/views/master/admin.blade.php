@@ -34,7 +34,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.parking.getCheckIn') }}">
+                                <a class="nav-link" href="{{ route('admin.parking.getCheckin') }}">
                                     <span data-feather="plus-square"></span>
                                     Registrar Entrada
                                 </a>

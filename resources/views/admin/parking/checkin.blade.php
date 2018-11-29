@@ -18,7 +18,6 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th></th>
                 <th>Cliente</th>
                 <th>Veículo</th>
                 <th>Placa</th>
@@ -26,17 +25,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    <span class="badge badge-success p-2">Saiu</span>
-                </td>
-                <td>ALISSON DE PÁDUA</td>
-                <td>CHEVROLET - AGILE 2011</td>
-                <td>HMT-4070</td>
-                <td>
-                    <button id="btnEntrance" type="button" class="btn btn-info">Registrar Entrada</button>
-                </td>
-            </tr>
+          @foreach($vehicles as $vehicle)
+            @if(!$vehicle->isParked())
+              <tr>
+                  <td>{{ $vehicle->client->name }}</td>
+                  <td>{{ $vehicle->model }} - {{ $vehicle->color }}</td>
+                  <td>{{ $vehicle->plate }}</td>
+                  <td>
+                      <button id="btnEntrance" type="button" class="btn btn-info">Registrar Entrada</button>
+                  </td>
+              </tr>
+            @endif
+          @endforeach
         </tbody>
     </table>
 

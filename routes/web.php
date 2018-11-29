@@ -42,6 +42,10 @@ Route::prefix('admin')->group(function(){
     'edit' => 'admin.parking.edit',
     'update' => 'admin.parking.update'
   ]);
+  Route::prefix('parking')->group(function () {
+    Route::get('checkin', 'ParkingController@getCheckin')->name('admin.parking.getCheckin');
+  });
+
   Route::resource('space', 'SpaceController')->names([
     'index' => 'admin.space.index',
     'create' => 'admin.space.create',

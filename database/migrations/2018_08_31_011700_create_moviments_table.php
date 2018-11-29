@@ -20,10 +20,10 @@ class CreateMovimentsTable extends Migration
             $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
             $table->unsignedInteger('space_id');
             $table->foreign('space_id')->references('id')->on('spaces')->onDelete('cascade');
-            $table->unsignedInteger('partner_id');
+            $table->unsignedInteger('partner_id')->nullable();
             $table->foreign('partner_id')->references('id')->on('partners')->onDelete('cascade');
             $table->datetime('inputed_at');
-            $table->datetime('leaved_at');
+            $table->datetime('leaved_at')->nullable();;
             $table->timestamps();
         });
     }

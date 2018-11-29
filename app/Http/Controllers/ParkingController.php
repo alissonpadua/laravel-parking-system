@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Parking;
+use App\Client;
+use App\Vehicle;
 
 class ParkingController extends Controller
 {
+
+    public function getCheckin(){
+      $vehicles = Vehicle::all();
+      return view('admin.parking.checkin', compact('vehicles'));
+    }
+
     /**
      * Display a listing of the resource.
      *
