@@ -57,4 +57,16 @@ class MovimentController extends Controller
 
     }
 
+    public function getCheckoutResume($id){
+      $moviment = Moviment::find($id);
+
+      if(!$moviment){
+        return ['error' => true, 'msg' => 'Falha ao calcular saída, tente novamente'];
+      }
+
+      return Carbon::now()->diffInMinutes($moviment->inputed_at);
+      dd($moviment);
+
+    }
+
 }

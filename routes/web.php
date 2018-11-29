@@ -51,8 +51,6 @@ Route::prefix('admin')->group(function(){
     'update' => 'admin.parking.update'
   ]);
 
-
-
   Route::resource('space', 'SpaceController')->names([
     'index' => 'admin.space.index',
     'create' => 'admin.space.create',
@@ -72,6 +70,7 @@ Route::prefix('admin')->group(function(){
 
   Route::prefix('moviment')->group(function () {
     Route::post('confirm-entrance', 'MovimentController@postConfirmEntrance');
+    Route::get('checkout-resume/{id}', 'MovimentController@getCheckoutResume');
   });
 
 });
