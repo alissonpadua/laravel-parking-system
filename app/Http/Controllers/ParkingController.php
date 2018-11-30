@@ -7,6 +7,9 @@ use App\Parking;
 use App\Client;
 use App\Vehicle;
 use App\Moviment;
+use App\Partner;
+use Carbon\Carbon;
+use App\Payment;
 
 class ParkingController extends Controller
 {
@@ -15,6 +18,7 @@ class ParkingController extends Controller
 
       $vehicles = Vehicle::all();
       $parkings = Parking::all();
+      
 
       return view('admin.parking.checkin', ['vehicles' => $vehicles, 'parkings' => $parkings]);
 
@@ -23,7 +27,59 @@ class ParkingController extends Controller
     public function getCheckout(){
 
         $moviments = Moviment::all();
-        return view('admin.parking.checkout', ['moviments' => $moviments]);
+        $partners = Partner::all();
+        return view('admin.parking.checkout', ['moviments' => $moviments, 'partners' => $partners]);
+
+    }
+
+    public function postCheckout(Request $request){
+
+        $request->validate([
+            'totalToPay' => 'required',
+            'discount' => 'required',
+            'movimentId' => 'required'
+        ]);
+
+        $moviment = Moviment::find($request->movimentId);
+
+        if(!$moviment){
+            return ['error' => true, 'msg' => 'Falha ao identificar movimentação, tente novamente'];
+        }
+
+        if($moviment->leaved_at){
+            return ['error' => true, 'msg' => 'Veículo já saiu do estacionamento'];
+        }
+
+        $cpfcliente   = $moviment->vehicle->client->cpf;
+        $namecliente  =  $moviment->vehicle->client->name;
+        $vehiclemodel = $moviment->vehicle->model;
+        $vehicleplate = $moviment->vehicle->plate;
+
+        $moviment->leaved_at = Carbon::now();
+
+        if($request->partner){
+
+            $moviment->partner_id = $request->partner;
+
+        }
+
+        $moviment->save();
+
+        Payment::create([
+            'moviment_id' => $moviment->id,
+            'price' => $request->totalToPay,
+            'cpfcliente' => $cpfcliente,
+            'namecliente' => $namecliente,
+            'vehiclemodel' => $vehiclemodel,
+            'vehicleplate' => $vehicleplate,
+            'discount' => $request->discount,
+            'inputed_at' => $moviment->inputed_at,
+            'leaved_at' => $moviment->leaved_at
+        ]);
+
+
+        return ['error' => false, 'msg' => 'Veículo liberado para saída'];
+
 
     }
 
@@ -60,13 +116,13 @@ class ParkingController extends Controller
         $request->validate([
             'name' => 'required',
             'cnpj' => 'required|min:18',
-          ]);
-          Parking::create([
-              'name' => $request->name,
-              'cnpj' => $request->cnpj,
-          ]);
-          return redirect()->route('admin.parking.index')
-              ->with('msg', 'Estacionamento Cadastrado com sucesso')
+        ]);
+        Parking::create([
+            'name' => $request->name,
+            'cnpj' => $request->cnpj,
+        ]);
+        return redirect()->route('admin.parking.index')
+            ->with('msg', 'Estacionamento Cadastrado com sucesso')
               ->with('type', 'success');
     }
 

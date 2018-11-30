@@ -72,6 +72,10 @@ class MovimentController extends Controller
 
       $hoursTotal = $minutesTotal / 60;
 
+      if($hoursTotal <= 0){
+        $hoursTotal = 1.00;
+      }
+
       $hoursToPay = ceil($hoursTotal);
 
       $normalToPay = $currentPrices->getOriginal('normalprice');

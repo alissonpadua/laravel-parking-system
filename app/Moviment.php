@@ -17,5 +17,8 @@ class Moviment extends Model
   public function partner(){
     return $this->belongsTo('App\Partner');
   }
+  public function payment(){
+    return $this->hasOne('App\Payment');
+  }
 
 }

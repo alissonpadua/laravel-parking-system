@@ -41,6 +41,7 @@ Route::prefix('admin')->group(function(){
   Route::prefix('parking')->group(function () {
     Route::get('checkin', 'ParkingController@getCheckin')->name('admin.parking.getCheckin');
     Route::get('checkout', 'ParkingController@getCheckout')->name('admin.parking.getCheckout');
+    Route::post('checkout', 'ParkingController@postCheckout')->name('admin.parking.postCheckout');
   });
 
   Route::resource('parking', 'ParkingController')->names([
