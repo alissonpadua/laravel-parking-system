@@ -10,6 +10,7 @@
 
         <link rel="stylesheet" href="/theme/plugin/bootstrap4/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="/theme/plugin/funkyradio/funkyradio.min.css">
+       
         <script src="/theme/plugin/jquery33/jquery-3.3.1.min.js"></script>
         <script src="/theme/plugin/bootstrap4/dist/js/popper.min.js"></script>
         <script src="/theme/plugin/bootstrap4/dist/js/bootstrap.min.js"></script>
@@ -22,7 +23,12 @@
             <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Estacionamento from Hell</a>
             <ul class="navbar-nav px-3">
                 <li class="nav-item text-nowrap">
-                <a class="nav-link" href="#">SAIR DO SISTEMA</a>
+                  <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                      SAIR DO SISTEMA
+                  </a>    
+                  <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      {{ csrf_field() }}
+                  </form>
                 </li>
             </ul>
         </nav>
@@ -32,7 +38,7 @@
                     <div class="sidebar-sticky">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link active" href="index.html#">
+                                <a class="nav-link active" href="{{ route('admin.home') }}">
                                     <span data-feather="bar-chart"></span>
                                     Dashboard <span class="sr-only">(current)</span>
                                 </a>
